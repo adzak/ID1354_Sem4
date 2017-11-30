@@ -27,14 +27,36 @@ class Controller
     {
         $commentadder = new CommentAdder;
         $commentadder->addComment($comment, $commenttype, $this->nickname);
+    }
+    
+    public function getComments($commenttype)
+    {
+        if($commenttype === 'meatballs')
+        {
+            $commentData = file('classes/integration/container.html');
+            return $commentData;
+        }
         
-        /*
-        $content = $comment;
-        $handle = fopen("classes/integration/container.html", "a");
-        $t=time();
-        fwrite($handle, "<b>".$this->nickname." ".gmdate("Y-m-d",$t)."</b>:<br>".$content."<p hidden>".time().",".$this->nickname."</p><br><br>"."\n");
-        fclose($handle);
-        */
+        if($commenttype === 'pancakes')
+        {
+            $commentData = file('classes/integration/containerpancakes.html');
+            return $commentData;
+        }
+    }
+    
+    public function deleteComment($timestamp, $commenttype)
+    {
+        $commentadder = new CommentAdder;
+        $commentadder->deleteComment($timestamp,$commenttype);   
+    }
+    
+    public function getTimestamps($commenttype)
+    {
+        $commentadder = new CommentAdder;
+        $return = $commentadder->getTimestamps($commenttype,$this->nickname);
+        
+        return $return;
+
     }
     
     public static function getSavedController()

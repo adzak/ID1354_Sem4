@@ -21,13 +21,13 @@ if(isset($_POST['uname']) && isset($_POST['psw']))
     
     else
     {
-       include 'resources/views/loggedinfailed.php';
+       include 'resources/views/loginfailed.php';
+       return;
     }
     
 }
 
 $currentcontr = Controller::getSavedController();
-
 if(!empty($currentcontr))
 {
     session_unset();

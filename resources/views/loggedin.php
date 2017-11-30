@@ -10,15 +10,15 @@
    <?php 
        include 'resources/fragments/navbar.php'; 
    ?>
-    <h1>Tasty Recipes</h1>
-    <div class="transbox">
-        <h2>Welcome 
+   <h1>Tasty Recipes</h1>
+   <div class="transbox">
+    <h2>Welcome 
         <?php
             use classes\controller\Controller;
             $contr = Controller::getSavedController();
             echo $contr->getNickname();
         ?>!
-        </h2>
-    </div>
+    </h2>
+   </div>
 </body>
 </html>

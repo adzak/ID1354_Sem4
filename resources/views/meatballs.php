@@ -1,37 +1,3 @@
-<?php
-
-    $commentData = file('classes/integration/container.html');
-    $i = 0;
-    $accessData = array();
-    foreach ($commentData as $line) {
-        if(strpos($line, $_SESSION['uname']) !== false) {
-            list($comment, $user) = explode('hidden>', $line);
-            $accessData[$i++] = trim($user);
-        }
-    }
-          
-    if($_POST['delete']){
-        
-        file_put_contents('classes/integration/container.html','');
-        
-        foreach($commentData as $line){
-            
-            if(strpos($line, $_POST['timestamp']) === false){
-                
-                $handle = fopen("container.html", "a");
-                fwrite($handle,$line);
-                fclose($handle);
-                
-            }
-                     
-        }
-        
-        header("Refresh:0");
-    }
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,31 +36,32 @@
     <hr>
     <div class="commentbox">
 
-           <?php
-                $commentData = file('classes/integration/container.html');
-                        $j = 0;
-                foreach ($commentData as $line) {
-                    if(strpos($line, $_SESSION['uname']) !== false) {
-                        echo $line;
-                        $timestamp = $accessData[$j];
-                        $j++;
+    <?php
+        $commentData =  $contr->getComments('meatballs');
+        $accessData = $contr->getTimestamps('meatballs');
+        $j = 0;
+        foreach ($commentData as $line) 
+        {
+            if(strpos($line, $contr->getNickname()) !== false) //TODO Hämta användaren som skrev kommentaren
+            {
+                echo $line;
+                $timestamp = $accessData[$j];
+                $j++;
 
-                        echo '
-                            <form method = "POST" action="/meatballs.php">
-                                <input type="submit" value="delete comment" name = "delete">
-                                <input type="hidden" value="'.$timestamp.'" name="timestamp">
-                            </form>
-                        ';        
-                                                                                
-                    }
-                    
-                    else
-                        echo $line;
-                }
-            ?>
-            
-		</div>
-		
-	</div>
+                echo '
+                    <form method = "POST" action="deleteComment.php">
+                        <input type="submit" value="delete comment" name = "delete">
+                        <input type="hidden" value="'.$timestamp.'" name="timestamp">
+                        <input type="hidden" value="meatballs" name="commenttype">
+                    </form>
+                    ';                                                                         
+            }
+
+            else
+               echo $line;
+        }
+    ?> 
+   </div>		
+  </div>
 </body>
 </html> 

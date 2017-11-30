@@ -1,49 +1,3 @@
-<?php
-
-
-
-    $commentData = file('containerpancakes.html');
-    $i = 0;
-    $accessData = array();
-    foreach ($commentData as $line) {
-        if(strpos($line, $_SESSION['uname']) !== false) {
-            list($comment, $user) = explode('hidden>', $line);
-            $accessData[$i++] = trim($user);
-        }
-    }
-      
-    if($_POST && !empty($_POST['comment'])){                                                                                                                                                                              
-        $content = $_POST['comment'];
-        $handle = fopen("containerpancakes.html", "a");
-        $t=time();
-        fwrite($handle, "<b>". $_SESSION['uname']." ".gmdate("Y-m-d",$t)."</b>:<br>".$content."<p hidden>".time().",".$_SESSION['uname']."</p><br><br>"."\n");
-        fclose($handle);
-        header("Refresh:0");
-    }
-    
-    if($_POST['delete']){
-        
-        file_put_contents('containerpancakes.html','');
-        
-        foreach($commentData as $line){
-            
-            if(strpos($line, $_POST['timestamp']) === false){
-                
-                $handle = fopen("containerpancakes.html", "a");
-                fwrite($handle,$line);
-                fclose($handle);
-                
-            }
-                
-            
-        }
-        
-        header("Refresh:0");
-    }
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,31 +34,32 @@
     <hr>
     <div class="commentbox">
 
-           <?php
-                $commentData = file('classes/integration/containerpancakes.html');
-                        $j = 0;
-                foreach ($commentData as $line) {
-                    if(strpos($line, $_SESSION['uname']) !== false) {
-                        echo $line;
-                        $timestamp = $accessData[$j];
-                        $j++;
+    <?php
+        $commentData =  $contr->getComments('pancakes');
+        $accessData = $contr->getTimestamps('pancakes');
+        $j = 0;
+        foreach ($commentData as $line) 
+        {
+            if(strpos($line, $contr->getNickname()) !== false) //TODO Hämta användaren som skrev kommentaren
+            {
+                echo $line;
+                $timestamp = $accessData[$j];
+                $j++;
 
-                        echo '
-                            <form method = "POST" action="/pancakes.php">
-                                <input type="submit" value="Delete comment" name = "delete">
-                                <input type="hidden" value="'.$timestamp.'" name="timestamp">
-                            </form>
-                        ';        
-                                                                                
-                    }
-                    
-                    else
-                        echo $line;
-                }
-            ?>
-            
-		</div>
-		
-	</div>
+                echo '
+                    <form method = "POST" action="deleteComment.php">
+                        <input type="submit" value="delete comment" name = "delete">
+                        <input type="hidden" value="'.$timestamp.'" name="timestamp">
+                        <input type="hidden" value="pancakes" name="commenttype">
+                    </form>
+                    ';                                                                         
+            }
+
+            else
+               echo $line;
+        }
+    ?>      
+    </div>
+  </div>
 </body>
 </html> 
