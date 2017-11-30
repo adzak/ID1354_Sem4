@@ -11,6 +11,7 @@ $contr = Controller::getSavedController();
 if(empty($contr))
 {
     $contr = new Controller();
+    Controller::saveController($contr);
 }
 
 include 'resources/views/pancakes.php';

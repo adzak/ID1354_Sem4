@@ -13,9 +13,10 @@ class HandleLogin
         list($username, $password) = explode(',', $line);
         $accessData[trim($username)] = trim($password);
         }
-
+        
+        password_verify($password, $hash);
         // Check input versus login.txt data
-        if (array_key_exists($uname, $accessData) && $psw == $accessData[$uname]) 
+        if (array_key_exists($uname, $accessData) && password_verify($psw,$accessData[$uname]))
         {
             return true;
         } 

@@ -35,14 +35,13 @@
     <h4>What others are saying...</h4>
     <hr>
     <div class="commentbox">
-
     <?php
         $commentData =  $contr->getComments('meatballs');
         $accessData = $contr->getTimestamps('meatballs');
         $j = 0;
         foreach ($commentData as $line) 
         {
-            if(strpos($line, $contr->getNickname()) !== false) //TODO Hämta användaren som skrev kommentaren
+            if(strpos($line, $contr->getNickname()) !== false) 
             {
                 echo $line;
                 $timestamp = $accessData[$j];

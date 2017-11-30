@@ -1,4 +1,3 @@
-Adrian,123
-Per,456
-Hejsan,test
-nikas,nokas
+Adrian,$2y$10$3zGcrJGRQ9uqU7kIVqQP4uivVKWRi7bC.nILXkJns0x.hp4FWZQMq
+Per,$2y$10$1bqt8mDw6.kINcvPO4M5JetJwEMKj0wbpMUL905xQx.RHJS5UC.nS
+Adriiiiiiiiiiiaaaaan,$2y$10$baTN11TKcfdqC2vP8M9dzeiwuMY0ZNwHMXsdXkmJfegSrxace7yHG

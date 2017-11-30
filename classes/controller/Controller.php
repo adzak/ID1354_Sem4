@@ -4,7 +4,7 @@ namespace classes\controller;
 
 use classes\model\HandleLogin;
 use classes\model\RegisterUser;
-use classes\model\CommentAdder;
+use classes\model\CommentHandler;
 
 class Controller
 {
@@ -25,7 +25,7 @@ class Controller
     
     public function addComment($comment,$commenttype)
     {
-        $commentadder = new CommentAdder;
+        $commentadder = new CommentHandler;
         $commentadder->addComment($comment, $commenttype, $this->nickname);
     }
     
@@ -46,15 +46,14 @@ class Controller
     
     public function deleteComment($timestamp, $commenttype)
     {
-        $commentadder = new CommentAdder;
+        $commentadder = new CommentHandler;
         $commentadder->deleteComment($timestamp,$commenttype);   
     }
     
     public function getTimestamps($commenttype)
     {
-        $commentadder = new CommentAdder;
+        $commentadder = new CommentHandler;
         $return = $commentadder->getTimestamps($commenttype,$this->nickname);
-        
         return $return;
 
     }

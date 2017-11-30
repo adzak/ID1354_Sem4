@@ -10,6 +10,8 @@ $contr = Controller::getSavedController();
 if(empty($contr))
 {
     $contr = new Controller();
+    $contr->saveController($contr);
+ 
 }
 
 include 'resources/views/meatballs.php';

@@ -2,7 +2,7 @@
 
 namespace classes\model;
 
-class CommentAdder
+class CommentHandler
 {
     public function addComment($comment,$type,$nickname)
     {
@@ -69,20 +69,26 @@ class CommentAdder
     
     private function addcommentMB($comment,$nickname)
     {
-        $content = $comment;
-        $handle = fopen("classes/integration/container.html", "a");
-        $t=time();
-        fwrite($handle, "<b>".$nickname." ".gmdate("Y-m-d",$t)."</b>:<br>".$content."<p hidden>".time().",".$nickname."</p><br><br>"."\n");
-        fclose($handle);
+        $content = htmlentities($comment, ENT_QUOTES);
+        if(ctype_print($content))
+        {
+            $handle = fopen("classes/integration/container.html", "a");
+            $t=time();
+            fwrite($handle, "<b>".$nickname." ".gmdate("Y-m-d",$t)."</b>:<br>".$content."<p hidden>".time().",".$nickname."</p><br><br>"."\n");
+            fclose($handle);
+        }
     }
     
     private function addcommentPC($comment,$nickname)
     {
-        $content = $comment;
-        $handle = fopen("classes/integration/containerpancakes.html", "a");
-        $t=time();
-        fwrite($handle, "<b>".$nickname." ".gmdate("Y-m-d",$t)."</b>:<br>".$content."<p hidden>".time().",".$nickname."</p><br><br>"."\n");
-        fclose($handle);
+        $content = htmlentities($comment, ENT_QUOTES);
+        if(ctype_print($content))
+        {
+            $handle = fopen("classes/integration/containerpancakes.html", "a");
+            $t=time();
+            fwrite($handle, "<b>".$nickname." ".gmdate("Y-m-d",$t)."</b>:<br>".$content."<p hidden>".time().",".$nickname."</p><br><br>"."\n");
+            fclose($handle);
+        }
     }
     
     private function timestampMB($nickname)

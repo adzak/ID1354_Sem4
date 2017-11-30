@@ -15,7 +15,7 @@ class Startup
         require_once 'classes/controller/Controller.php';
         require_once 'classes/model/HandleLogin.php';
         require_once 'classes/model/RegisterUser.php';
-        require_once 'classes/model/CommentAdder.php';
+        require_once 'classes/model/CommentHandler.php';
     }
 }
 
