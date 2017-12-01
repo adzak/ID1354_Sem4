@@ -2,13 +2,23 @@
 
 namespace classes\model;
 
+use classes\integration\databaseHandler;
+
 class HandleLogin
 {
+    private $databaseHandler;
+    
+    public function __construct()
+    {
+        $this->databaseHandler = new databaseHandler();
+    }
+    
     public function verifyLogin($uname,$psw)
     {
         if(ctype_print($uname) && ctype_print($uname))
         {
-            $loginData = file('classes/integration/accounts.txt');
+            //$loginData = file('classes/database/accounts.txt');
+            $loginData = $this->databaseHandler->getUsers();
             $accessData = array();
             foreach ($loginData as $line) {
             list($username, $password) = explode(',', $line);

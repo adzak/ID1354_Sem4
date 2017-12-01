@@ -14,7 +14,7 @@
     <div class = "transbox">
         <form method="post" action="/login.php">
             <div class="imgcontainer">
-            <img src="images/avatar.png" alt="Avatar" class="avatar">
+            <img src="resources/images/avatar.png" alt="Avatar" class="avatar">
             </div>
              
             <div class="container">

@@ -33,13 +33,17 @@ class Controller
     {
         if($commenttype === 'meatballs')
         {
-            $commentData = file('classes/integration/container.html');
+            $commenthandler = new CommentHandler();
+            $commentData = $commenthandler->getCommentsMB();
+            //$commentData = file('classes/database/container.html');
             return $commentData;
         }
         
         if($commenttype === 'pancakes')
-        {
-            $commentData = file('classes/integration/containerpancakes.html');
+        {        
+            $commenthandler = new CommentHandler();
+            $commentData = $commenthandler->getCommentsPC();
+            //$commentData = file('classes/database/containerpancakes.html');
             return $commentData;
         }
     }

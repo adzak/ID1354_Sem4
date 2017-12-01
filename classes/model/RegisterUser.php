@@ -2,16 +2,25 @@
 
 namespace classes\model;
 
+use classes\integration\databaseHandler;
+
 class RegisterUser
 {
+    
+    private $databaseHandler;
+    
+    public function __construct()
+    {
+        $this->databaseHandler = new databaseHandler();
+    }
+    
     public function RegisterUser($uname,$psw)
     {
         if(ctype_print($uname) && ctype_print($psw))
         {
-            $handle = fopen("classes/integration/accounts.txt", "a");
             $password = password_hash($psw, PASSWORD_DEFAULT);
-            fwrite($handle,"\n".$uname.','.$password);
-            fclose($handle);
+            $this->databaseHandler->insertUser($uname, $password);
+
         }
     }
 }

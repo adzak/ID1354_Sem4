@@ -2,8 +2,17 @@
 
 namespace classes\model;
 
+use classes\integration\databaseHandler;
+
 class CommentHandler
 {
+    private $databaseHandler;
+    
+    public function __construct()
+    {
+        $this->databaseHandler = new databaseHandler();
+    }
+    
     public function addComment($comment,$type,$nickname)
     {
         if($type === 'meatballs')
@@ -41,28 +50,28 @@ class CommentHandler
       
     private function deletecommentMB($timestamp)
     {
-        $commentData = file('classes/integration/container.html');
-        file_put_contents('classes/integration/container.html','');
+        //$commentData = file('classes/database/container.html'); 
+        //file_put_contents('classes/database/container.html','');
+        $commentData = $this->databaseHandler->getCommentsMB();
+        $this->databaseHandler->clearMB();
         foreach($commentData as $line){
             if(strpos($line, $timestamp) === false)
             {
-                $handle = fopen("classes/integration/container.html", "a");
-                fwrite($handle,$line);
-                fclose($handle);    
+               $this->databaseHandler->deletecommentMB($line);
             }
         }
     }
     
     private function deletecommentPC($timestamp)
     {
-        $commentData = file('classes/integration/containerpancakes.html');
-        file_put_contents('classes/integration/containerpancakes.html','');
+        //$commentData = file('classes/database/containerpancakes.html');
+        //file_put_contents('classes/database/containerpancakes.html','');
+        $commentData = $this->databaseHandler->getCommentsPC();
+        $this->databaseHandler->clearPC();
         foreach($commentData as $line){
             if(strpos($line, $timestamp) === false)
             {
-                $handle = fopen("classes/integration/containerpancakes.html", "a");
-                fwrite($handle,$line);
-                fclose($handle);    
+               $this->databaseHandler->deletecommentPC($line);
             }
         }  
     }
@@ -72,10 +81,15 @@ class CommentHandler
         $content = htmlentities($comment, ENT_QUOTES);
         if(ctype_print($content))
         {
-            $handle = fopen("classes/integration/container.html", "a");
+            /*
+            $this->databaseHandler->deletecommentPC($line);
+            $handle = fopen("classes/database/container.html", "a");
             $t=time();
             fwrite($handle, "<b>".$nickname." ".gmdate("Y-m-d",$t)."</b>:<br>".$content."<p hidden>".time().",".$nickname."</p><br><br>"."\n");
             fclose($handle);
+            */
+            
+            $this->databaseHandler->addCommentMB($content, $nickname);
         }
     }
     
@@ -84,16 +98,21 @@ class CommentHandler
         $content = htmlentities($comment, ENT_QUOTES);
         if(ctype_print($content))
         {
-            $handle = fopen("classes/integration/containerpancakes.html", "a");
+            /*
+            $handle = fopen("classes/database/containerpancakes.html", "a");
             $t=time();
             fwrite($handle, "<b>".$nickname." ".gmdate("Y-m-d",$t)."</b>:<br>".$content."<p hidden>".time().",".$nickname."</p><br><br>"."\n");
             fclose($handle);
+            */
+            
+            $this->databaseHandler->addCommentPC($content, $nickname);
+             
         }
     }
     
     private function timestampMB($nickname)
     {
-        $commentData = file('classes/integration/container.html');
+        $commentData = $this->getCommentsMB();
         $i = 0;
         $accessData = array();
         foreach ($commentData as $line) 
@@ -110,7 +129,7 @@ class CommentHandler
     
     private function timestampPC($nickname)
     {
-        $commentData = file('classes/integration/containerpancakes.html');
+        $commentData = $this->getCommentsPC();
         $i = 0;
         $accessData = array();
         foreach ($commentData as $line) 
@@ -123,6 +142,18 @@ class CommentHandler
         }
         
         return $accessData;
+    }
+    
+    public function getCommentsMB()
+    {
+        $return = $this->databaseHandler->getCommentsMB();
+        return $return;
+    }
+    
+    public function getCommentsPC()
+    {
+        $return = $this->databaseHandler->getCommentsPC();
+        return $return;
     }
       
 }
