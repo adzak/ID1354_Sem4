@@ -6,7 +6,7 @@ class RegisterUser
 {
     public function RegisterUser($uname,$psw)
     {
-        if(ctype_print($uname) && ctype_print($uname))
+        if(ctype_print($uname) && ctype_print($psw))
         {
             $handle = fopen("classes/integration/accounts.txt", "a");
             $password = password_hash($psw, PASSWORD_DEFAULT);

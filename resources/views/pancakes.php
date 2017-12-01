@@ -39,7 +39,8 @@
         $j = 0;
         foreach ($commentData as $line) 
         {
-            if(strpos($line, $contr->getNickname()) !== false) 
+            $text = explode(',', $line, 2)[1];
+            if(strpos($text, $contr->getNickname()) !== false) 
             {
                 echo $line;
                 $timestamp = $accessData[$j];

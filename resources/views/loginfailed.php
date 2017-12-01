@@ -12,7 +12,7 @@
    ?>
     <h1>LOGIN</h1>
     <div class = "transbox">
-         <form method="post" action="/loggedin.php">
+        <form method="post" action="/login.php">
             <div class="imgcontainer">
             <img src="images/avatar.png" alt="Avatar" class="avatar">
             </div>

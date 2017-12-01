@@ -25,7 +25,7 @@ class Controller
     
     public function addComment($comment,$commenttype)
     {
-        $commentadder = new CommentHandler;
+        $commentadder = new CommentHandler();
         $commentadder->addComment($comment, $commenttype, $this->nickname);
     }
     
@@ -46,13 +46,13 @@ class Controller
     
     public function deleteComment($timestamp, $commenttype)
     {
-        $commentadder = new CommentHandler;
+        $commentadder = new CommentHandler();
         $commentadder->deleteComment($timestamp,$commenttype);   
     }
     
     public function getTimestamps($commenttype)
     {
-        $commentadder = new CommentHandler;
+        $commentadder = new CommentHandler();
         $return = $commentadder->getTimestamps($commenttype,$this->nickname);
         return $return;
 

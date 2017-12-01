@@ -23,9 +23,9 @@
 
             <button type="submit">Sign up</button>
             <input type="checkbox" checked="checked"> Remember me
-            </div>
+        </div>
 
-            <div class="container">
+        <div class="container">
             <button type="button" class="cancelbtn">Cancel</button>
             <span class="psw">Forgot <a href="#">password?</a></span>
         </div>
