@@ -17,7 +17,6 @@ class HandleLogin
     {
         if(ctype_print($uname) && ctype_print($uname))
         {
-            //$loginData = file('classes/database/accounts.txt');
             $loginData = $this->databaseHandler->getUsers();
             $accessData = array();
             foreach ($loginData as $line) {

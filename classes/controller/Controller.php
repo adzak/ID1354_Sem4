@@ -35,7 +35,6 @@ class Controller
         {
             $commenthandler = new CommentHandler();
             $commentData = $commenthandler->getCommentsMB();
-            //$commentData = file('classes/database/container.html');
             return $commentData;
         }
         
@@ -43,7 +42,6 @@ class Controller
         {        
             $commenthandler = new CommentHandler();
             $commentData = $commenthandler->getCommentsPC();
-            //$commentData = file('classes/database/containerpancakes.html');
             return $commentData;
         }
     }
