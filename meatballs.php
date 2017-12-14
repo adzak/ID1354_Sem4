@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Shows the meatballs view.
  */
@@ -11,7 +10,6 @@ if(empty($contr))
 {
     $contr = new Controller();
     $contr->saveController($contr);
- 
 }
 
 include 'resources/views/meatballs.php';

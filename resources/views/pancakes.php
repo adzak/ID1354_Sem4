@@ -5,6 +5,8 @@
     <link href="/resources/css/reset.css" rel="stylesheet" type="text/css">
     <link href="/resources/css/stylesheet.css" rel="stylesheet" type="text/css">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src ="/resources/js/comments.js"></script>
 </head>
 <body>
    <?php 
@@ -31,34 +33,9 @@
     ?>
     <h4>What others are saying...</h4>
     <hr>
-    <div class="commentbox">
-
-    <?php
-        $commentData =  $contr->getComments('pancakes');
-        $accessData = $contr->getTimestamps('pancakes');
-        $j = 0;
-        foreach ($commentData as $line) 
-        {
-            $text = explode(',', $line, 2)[1];
-            if(strpos($text, $contr->getNickname()) !== false) 
-            {
-                echo $line;
-                $timestamp = $accessData[$j];
-                $j++;
-
-                echo '
-                    <form method = "POST" action="deleteComment.php">
-                        <input type="submit" value="delete comment" name = "delete">
-                        <input type="hidden" value="'.$timestamp.'" name="timestamp">
-                        <input type="hidden" value="pancakes" name="commenttype">
-                    </form>
-                    ';                                                                         
-            }
-
-            else
-               echo $line;
-        }
-    ?>      
+    <button id="loadcommentsPC">Update comments</button>
+    <p hidden id="nicknameLabelP" ><?php echo $contr->getNickname();?></p>
+    <div class="commentbox">     
     </div>
   </div>
 </body>

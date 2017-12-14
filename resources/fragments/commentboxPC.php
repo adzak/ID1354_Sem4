@@ -11,12 +11,12 @@ if(!empty($contr))
         echo'
         <h2>Add a public comment</h2>
           <div class="comments">
-            <form action="addComment.php" method = "POST">
+            <form id="postC">
                 <label>Comment</label>
                 <input type="text" id="comment" name="comment" placeholder="Type your comment here..">
-                <input type="submit" value="Post comment">
                 <input type="hidden" value="pancakes" name="commenttype">
             </form>
+                <button id="postComment">Post comment</button> 
            </div>';
     }
     
